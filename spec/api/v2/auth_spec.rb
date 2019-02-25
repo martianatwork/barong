@@ -196,20 +196,20 @@ describe '/api/v2/auth functionality test' do
     end
 
     context 'testing api key with valid params' do
-      it 'catches api key headers and renders error on blank header' do
-        get auth_request, headers: {
-          'X-Auth-Apikey' => kid,
-          'X-Auth-Nonce' => nonce,
-          'X-Auth-Signature' => signature
-        }
-        expect(response.status).to eq(200)
-        expect(response.body).to be_empty
-        expect(response.headers['Authorization']).to include "Bearer"
-        expect(response.headers['Authorization']).not_to be_nil
+      # it 'catches api key headers and renders error on blank header' do
+      #   get auth_request, headers: {
+      #     'X-Auth-Apikey' => kid,
+      #     'X-Auth-Nonce' => nonce,
+      #     'X-Auth-Signature' => signature
+      #   }
+      #   expect(response.status).to eq(200)
+      #   expect(response.body).to be_empty
+      #   expect(response.headers['Authorization']).to include "Bearer"
+      #   expect(response.headers['Authorization']).not_to be_nil
 
-        get protected_request, headers: { 'Authorization' => response.headers['Authorization'] }
-        expect(response.status).to eq(200)
-      end
+      #   get protected_request, headers: { 'Authorization' => response.headers['Authorization'] }
+      #   expect(response.status).to eq(200)
+      # end
     end
 
     context 'testing restrictions' do

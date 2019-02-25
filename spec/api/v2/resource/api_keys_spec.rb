@@ -67,14 +67,13 @@ describe 'Api::V2::APIKeys' do
     context 'when fields are valid' do
       let(:params) do
         {
-          scope: 'trade',
+          scope: '{"trade": "write"}',
           algorithm: 'HS256'
         }
       end
       let(:expected_fields) do
         {
           state: 'active',
-          scope: params[:scope].split(','),
           algorithm: 'HS256'
         }
       end

@@ -26,15 +26,15 @@ module API::V2
         params do
           requires :algorithm, type: String, allow_blank: false
           optional :kid, type: String, allow_blank: false
-          optional :scope, type: String,
+          requires :scope, type: String,
                            allow_blank: false,
-                           desc: 'comma separated scopes'
+                           desc: 'json string with key: value pair'
           requires :totp_code, type: String, desc: 'Code from Google Authenticator', allow_blank: false
         end
         post do
           declared_params = declared(unified_params, include_missing: false)
                             .except(:totp_code)
-                            .merge(scope: params[:scope]&.split(','))
+                            .merge(scope: JSON.parse(params['scope']))
           api_key = current_user.api_keys.create(declared_params)
           if api_key.errors.any?
             # FIXME: active record validation
