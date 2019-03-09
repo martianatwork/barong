@@ -62,6 +62,7 @@ class User < ApplicationRecord
   end
 
   def referral_uid
+    return unless referral_id.present?
     member = User.find(referral_id)
     return member.uid if member
   end
