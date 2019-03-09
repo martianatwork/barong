@@ -87,7 +87,7 @@ class User < ApplicationRecord
   end
 
   def as_payload
-    as_json(only: %i[uid email referral_id role level state])
+    as_json(only: %i[uid email referral_uid role level state])
   end
 
   private
